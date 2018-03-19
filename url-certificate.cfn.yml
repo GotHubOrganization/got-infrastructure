@@ -1,0 +1,15 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Gothub infrastructure
+Parameters:
+  DomainName:
+    Type: String
+    Default: "*.gothub.io"
+    Description: "Domain name which the certificate should be signed"
+Resources:
+  GotHubCertificate:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName: !Ref 'DomainName'
+      DomainValidationOptions:
+        - DomainName: !Ref 'DomainName'
+          ValidationDomain: !Ref 'DomainName'
