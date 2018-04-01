@@ -188,7 +188,11 @@ Resources:
         - TargetGroupArn: !Ref 'DummyTargetGroupPublic'
           Type: 'forward'
       LoadBalancerArn: !Ref 'PublicLoadBalancer'
-      Port: 80
+      Port: 
+        Fn::If:
+          - 'HasCertificate'
+          - '443'
+          - '80'
       Protocol: 
         Fn::If:
           - 'HasCertificate'
